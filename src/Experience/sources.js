@@ -12,8 +12,8 @@ export default [
     ],
   },
   {
-    name: "waveGeneratorsModel",
+    name: "slitsModel",
     type: "gltfModel",
-    path: "models/waveGenerators.glb",
+    path: "models/slits.glb",
   },
 ];

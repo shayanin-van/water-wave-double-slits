@@ -1,7 +1,6 @@
 import * as THREE from "three";
 import Experience from "./Experience.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import { DragControls } from "three/examples/jsm/controls/DragControls.js";
 
 export default class Camera {
   constructor() {
@@ -12,7 +11,6 @@ export default class Camera {
 
     this.setInstance();
     this.setControls();
-    this.setDrag();
   }
 
   setInstance() {
@@ -31,24 +29,6 @@ export default class Camera {
     this.controls.enableDamping = true;
     this.controls.maxPolarAngle = Math.PI / 2;
     this.controls.target.set(0, 0, -2);
-  }
-
-  setDrag() {
-    this.drag = new DragControls([], this.instance, this.canvas);
-    this.drag.recursive = false;
-    this.drag.enabled = true;
-    this.drag.rotateSpeed = 0;
-
-    this.drag.addEventListener("dragstart", () => {
-      this.controls.enabled = false;
-      this.drag.addEventListener(
-        "dragend",
-        () => {
-          this.controls.enabled = true;
-        },
-        { once: true }
-      );
-    });
   }
 
   resize() {
