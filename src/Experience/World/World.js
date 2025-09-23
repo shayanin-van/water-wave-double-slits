@@ -1,5 +1,6 @@
 import Experience from "../Experience.js";
 import Environment from "./Environment.js";
+import Screen from "./Screen.js";
 import Water from "./Water.js";
 
 export default class World {
@@ -13,12 +14,16 @@ export default class World {
       // Setup
       this.environment = new Environment();
       this.water = new Water();
+      this.screen = new Screen();
     });
   }
 
   update() {
     if (this.water) {
       this.water.update();
+    }
+    if (this.screen) {
+      this.screen.update();
     }
   }
 }

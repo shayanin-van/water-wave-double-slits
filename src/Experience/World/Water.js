@@ -2,6 +2,8 @@ import * as THREE from "three";
 import Experience from "../Experience.js";
 import mainVertex from "../../Shaders/water/mainVertex.glsl";
 import mainFragment from "../../Shaders/water/mainFragment.glsl";
+import inVertex from "../../Shaders/water/inVertex.glsl";
+import inFragment from "../../Shaders/water/inFragment.glsl";
 
 export default class Water {
   constructor() {
@@ -24,7 +26,7 @@ export default class Water {
   }
 
   setMainSurface() {
-    this.mainSurfaceGeo = new THREE.PlaneGeometry(10, 8, 128, 128);
+    this.mainSurfaceGeo = new THREE.PlaneGeometry(9.98, 8, 128, 102);
     this.mainSurfaceMat = new THREE.ShaderMaterial({
       vertexShader: mainVertex,
       fragmentShader: mainFragment,
@@ -42,7 +44,22 @@ export default class Water {
     this.scene.add(this.mainSurfaceModel);
   }
 
-  setInSurface() {}
+  setInSurface() {
+    this.inSurfaceGeo = new THREE.PlaneGeometry(9.98, 3, 128, 38);
+    this.inSurfaceMat = new THREE.ShaderMaterial({
+      vertexShader: inVertex,
+      fragmentShader: inFragment,
+      wireframe: true,
+      uniforms: {
+        uTime: { value: 0 },
+      },
+    });
+    this.inSurfaceModel = new THREE.Mesh(this.inSurfaceGeo, this.inSurfaceMat);
+    this.inSurfaceModel.translateZ(-5.5);
+    this.inSurfaceModel.rotateX(-Math.PI / 2);
+
+    this.scene.add(this.inSurfaceModel);
+  }
 
   setSlit() {
     this.resource.scene.traverse((child) => {
@@ -57,5 +74,6 @@ export default class Water {
   update() {
     // water surface
     this.mainSurfaceMat.uniforms.uTime.value = this.time.elapsed;
+    this.inSurfaceMat.uniforms.uTime.value = this.time.elapsed;
   }
 }

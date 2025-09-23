@@ -12,6 +12,11 @@ export default [
     ],
   },
   {
+    name: "screenTexture",
+    type: "texture",
+    path: "textures/screen/screenTexture.png",
+  },
+  {
     name: "slitsModel",
     type: "gltfModel",
     path: "models/slits.glb",
