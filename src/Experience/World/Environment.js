@@ -35,7 +35,7 @@ export default class Environment {
   }
 
   setAmbient() {
-    this.ambientLight = new THREE.AmbientLight(0xffffff, 2);
+    this.ambientLight = new THREE.AmbientLight(0xffffff, 1.6);
     this.scene.add(this.ambientLight);
   }
 }
