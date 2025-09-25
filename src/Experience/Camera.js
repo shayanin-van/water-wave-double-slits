@@ -29,6 +29,7 @@ export default class Camera {
     this.controls.enableDamping = true;
     this.controls.maxPolarAngle = Math.PI / 2;
     this.controls.target.set(0, 0, -2);
+    this.controls.enablePan = false;
   }
 
   resize() {
