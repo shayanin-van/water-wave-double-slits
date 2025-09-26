@@ -30,7 +30,6 @@ export default class Screen {
     // model
     this.modelGeo = new THREE.PlaneGeometry(this.width, this.height);
     this.modelMat = new THREE.MeshStandardMaterial({
-      color: "grey",
       map: this.texture,
       side: THREE.DoubleSide,
     });

@@ -4,6 +4,7 @@ import mainVertex from "../../Shaders/water/mainVertex.glsl";
 import mainFragment from "../../Shaders/water/mainFragment.glsl";
 import inVertex from "../../Shaders/water/inVertex.glsl";
 import inFragment from "../../Shaders/water/inFragment.glsl";
+import CustomShaderMaterial from "three-custom-shader-material/vanilla";
 
 export default class Water {
   constructor() {
@@ -26,37 +27,41 @@ export default class Water {
   }
 
   setMainSurface() {
-    this.mainSurfaceGeo = new THREE.PlaneGeometry(9.98, 8, 128, 102);
-    this.mainSurfaceMat = new THREE.ShaderMaterial({
+    this.mainSurfaceGeo = new THREE.PlaneGeometry(9.98, 8, 256, 204);
+    this.mainSurfaceMat = new CustomShaderMaterial({
+      baseMaterial: THREE.MeshStandardMaterial,
       vertexShader: mainVertex,
       fragmentShader: mainFragment,
-      wireframe: true,
       uniforms: {
         uTime: { value: 0 },
       },
+      color: "#1ca3ec",
+      roughness: 0.0,
     });
     this.mainSurfaceModel = new THREE.Mesh(
       this.mainSurfaceGeo,
       this.mainSurfaceMat
     );
-    this.mainSurfaceModel.rotateX(-Math.PI / 2);
+    this.mainSurfaceModel.geometry.rotateX(-Math.PI / 2);
 
     this.scene.add(this.mainSurfaceModel);
   }
 
   setInSurface() {
-    this.inSurfaceGeo = new THREE.PlaneGeometry(9.98, 3, 128, 38);
-    this.inSurfaceMat = new THREE.ShaderMaterial({
+    this.inSurfaceGeo = new THREE.PlaneGeometry(9.98, 3, 256, 76);
+    this.inSurfaceMat = new CustomShaderMaterial({
+      baseMaterial: THREE.MeshStandardMaterial,
       vertexShader: inVertex,
       fragmentShader: inFragment,
-      wireframe: true,
       uniforms: {
         uTime: { value: 0 },
       },
+      color: "#1ca3ec",
+      roughness: 0.0,
     });
     this.inSurfaceModel = new THREE.Mesh(this.inSurfaceGeo, this.inSurfaceMat);
     this.inSurfaceModel.translateZ(-5.5);
-    this.inSurfaceModel.rotateX(-Math.PI / 2);
+    this.inSurfaceModel.geometry.rotateX(-Math.PI / 2);
 
     this.scene.add(this.inSurfaceModel);
   }
